@@ -18,18 +18,13 @@ public class ContractCustomRepositoryImpl implements ContractCustomRepository {
     
     @Override
     public List<Contract> search(ContractRequest contractRequest) {
-        ContractRequest contractRequest1 =  ContractRequest.builder()
-                .name("jon")
-                .id(1L)
-                .clientId(1L)
-                .build();
         
-        Query query = entityManager.createQuery(createSqlQuery(contractRequest1));
-        if (contractRequest1.getClientId() != null) {
-            query.setParameter("clientId", contractRequest1.getClientId());
+        Query query = entityManager.createQuery(createSqlQuery(contractRequest));
+        if (contractRequest.getClientId() != null) {
+            query.setParameter("clientId", contractRequest.getClientId());
         }
-        if (StringUtils.hasText(contractRequest1.getName())) {
-            query.setParameter("clientName", contractRequest1.getName());
+        if (StringUtils.hasText(contractRequest.getName())) {
+            query.setParameter("clientName", contractRequest.getName());
         }
         
         return query.getResultList();
